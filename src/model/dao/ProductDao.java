@@ -74,21 +74,21 @@ public class ProductDao {
     // 3. 수정정보선택 메소드
     // 기능설명 : 사용자로부터 수정할 상품번호, 비밀번호를 입력받아 기본정보를 출력하고 3-2로 연계한다.
     // 메소드명 : productUpdate()
-    // 매개변수 : int pno, String ppwd
-    // 반환값 : 0(실패) / 1(물품정보수정) / 2(물품판매여부수정) -> int
+    // 매개변수 : int pno
+    // 반환값 : ProductDto { pname, pexplain, pprice, psale }
 
 
     // 3-1. 물품정보수정 메소드
-    // 기능설명 : 사용자가 1을 선택하면, 사용자로부터 수정할 부분을 입력받아 상품명, 상품설명, 가격을 수정한다.
+    // 기능설명 : 사용자가 1을 선택하면, 입력한 pno를 갖고오고, 사용자로부터 수정할 부분을 입력받아 상품명, 상품설명, 가격을 수정한다.
     // 메소드명 : productInfoUpdate()
-    // 매개변수 : String pname, String pexplain, int pprice
+    // 매개변수 : int pno, String pname, String pexplain, int pprice
     // 반환값 : true(성공) / false(실패) -> boolean
 
 
     // 3-2. 물품판매여부수정 메소드
-    // 기능설명 : 사용자가 2를 선택하면, 사용자로부터 수정할 부분을 입력받아 판매여부를 수정한다.
+    // 기능설명 : 사용자가 2를 선택하면, 입력한 pno를 갖고오고, 사용자로부터 수정할 부분을 입력받아 판매여부를 수정한다.
     // 메소드명 : productSaleUpdate()
-    // 매개변수 : String psale
+    // 매개변수 : int pno, String psale
     // 반환값 : true(성공) / false(실패) -> boolean
 
 
@@ -118,5 +118,13 @@ public class ProductDao {
     // 메소드명 : search()
     // 매개변수 : String keyword
     // 반환값 : ProductDto
+
+
+    // *. 비밀번호검사 메소드
+    // 기능설명 : 사용자로부터 비밀번호를 입력받아, 비밀번호 검사를 한다.
+    // 메소드명 : pwdCheck()
+    // 매개변수 : String ppwd
+    // 반환값 : true(성공) / false(실패) -> boolean
+
 
 } // class end
