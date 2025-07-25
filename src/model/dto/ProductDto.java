@@ -29,6 +29,25 @@ public class ProductDto {
         this.pprice = pprice;
         this.ppwd = ppwd;
     } // func end // 물품등록 메소드에서 사용할 생성자
+    public ProductDto(int pno, String pnickname, String pname, String pexplain, int pprice, String pdate, String psale) {
+        this.pno = pno;
+        this.pnickname = pnickname;
+        this.pname = pname;
+        this.pexplain = pexplain;
+        this.pprice = pprice;
+        this.pdate = pdate;
+        this.psale = psale;
+    } // func end // 상품전체조회 + 상품상세조회 메소드에서 사용할 생성자
+    public ProductDto(int pno, String ppwd) {
+        this.pno = pno;
+        this.ppwd = ppwd;
+    } // func end // 비밀번호검사 메소드에서 사용할 생성자
+    public ProductDto(int pno, String pname, String pexplain, int pprice) {
+        this.pno = pno;
+        this.pname = pname;
+        this.pexplain = pexplain;
+        this.pprice = pprice;
+    } // func end // 상품정보수정 메소드에서 사용할 생성자
 
     // 3. 메소드 : getter / setter / toString()
     public int getPno() { return pno; }
