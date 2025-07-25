@@ -31,7 +31,7 @@ public class MainView {
                 // 사용자에게 선택받기
                 System.out.print("선택 : ");      int choose = scan.nextInt();
                 if ( choose == 1 ){             // 1을 선택하면
-
+                    productRegisPrint();
                 }else if ( choose == 2 ){       // 2를 선택하면
 
                 }else if ( choose == 3 ){       // 3을 선택하면
@@ -61,12 +61,26 @@ public class MainView {
 
     // 1. 상품등록 화면
     public void productRegisPrint(){
-        // 1. 사용자로부터 입력받기
-
-        // 2. controller에게 전달 후 결과 받기
-
-        // 3. 결과에 따른 출력하기
-
+        try {
+            System.out.println("========================================================================================================");
+            // 1. 사용자로부터 입력받기
+            System.out.print("닉네임 : ");         String pnickname = scan.next();
+            scan.nextLine(); // 의미없는 nextLine() 필요
+            System.out.print("상품명 : ");         String pname = scan.nextLine();
+            System.out.print("상품설명 : ");        String pexplain = scan.nextLine();
+            System.out.print("상품가격 : ");        int pprice = scan.nextInt();
+            System.out.print("비밀번호 : ");        String ppwd = scan.next();
+            // 2. controller에게 전달 후 결과 받기
+            boolean result = productController.productRegis( pnickname, pname, pexplain, pprice, ppwd );
+            // 3. 결과에 따른 출력하기
+            if ( result ){
+                System.out.println("[안내] 상품 등록 성공");
+            }else {
+                System.out.println("[경고] 상품 등록 실패");
+            } // if end
+        } catch ( InputMismatchException e ){
+            System.out.println("[경고] 입력타입이 일치하지 않습니다. 다시 입력하세요.");
+        } // try-catch end
     } // func end
 
     // 2. 상품전체조회 화면

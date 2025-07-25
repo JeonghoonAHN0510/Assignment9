@@ -9,7 +9,7 @@ public class AppStart {
         // System.out.println( test );
 
         // 메인화면 호출
-        // MainView.getInstance().main();
+        MainView.getInstance().main();
 
     } // main end
 } // class end
