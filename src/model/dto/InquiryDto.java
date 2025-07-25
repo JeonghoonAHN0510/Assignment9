@@ -16,6 +16,13 @@ public class InquiryDto {
         this.ipwd = ipwd;
         this.pno = pno;
     } // func end
+    public InquiryDto(String inickname, String iexplain, String ipwd, int pno) {
+        this.inickname = inickname;
+        this.iexplain = iexplain;
+        this.ipwd = ipwd;
+        this.pno = pno;
+    } // func end // 문의등록 메소드에서 사용할 생성자
+
     // 3. 메소드 : getter / setter / toString()
     public int getIno() { return ino; }
     public void setIno(int ino) { this.ino = ino; }

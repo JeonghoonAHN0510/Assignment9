@@ -201,9 +201,29 @@ public class ProductDao {
     // 4. 상품삭제 메소드
     // 기능설명 : 사용자로부터 삭제할 상품번호와 비밀번호를 입력받아 해당하는 상품을 삭제한다.
     // 메소드명 : productDelete()
-    // 매개변수 : int pno, String ppwd
+    // 매개변수 : int pno
     // 반환값 : true(성공) / false(실패) -> boolean
-
+    public boolean productDelete( int pno ){
+        try {
+            // 1. SQL 작성
+            String SQL = "delete from product where pno = ?";
+            // 2. SQL 기재
+            PreparedStatement ps = conn.prepareStatement( SQL );
+            // 3. SQL 매개변수 대입
+            ps.setInt( 1, pno );
+            // 4. SQL 실행
+            int count = ps.executeUpdate();
+            // 5. SQL 결과 반환 및 리턴
+            if ( count == 1 ){
+                return true;
+            }else {
+                return false;
+            } // if end
+        } catch ( SQLException e ){
+            System.out.println("[경고] SQL 기재 실패");
+            return false;
+        } // try-catch end
+    } // func end
 
     // 7. 등록랭킹조회 메소드
     // 기능설명 : 상품DB에 등록된 상품개수를 세어 상위 10명까지 닉네임과 등록수를 호출한다.

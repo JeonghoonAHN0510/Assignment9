@@ -1,7 +1,10 @@
 package model.dao;
 
+import model.dto.InquiryDto;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class InquiryDao {
@@ -33,9 +36,32 @@ public class InquiryDao {
     // 5. 문의등록 메소드
     // 기능설명 : 사용자로부터 문의할 상품번호, 닉네임, 문의내용, 비밀번호를 입력받아 문의를 문의DB에 저장한다.
     // 메소드명 : inquiryRegis()
-    // 매개변수 : int pno, String inickname, String iexplain, String ipwd
+    // 매개변수 : String inickname, String iexplain, String ipwd, int pno -> InquiryDto
     // 반환값 : true(성공) / false(실패) -> boolean
-
+    public boolean inquiryRegis( InquiryDto inquiryDto ){
+        try {
+            // 1. SQL 작성
+            String SQL = "insert into inquiry( inickname, iexplain, ipwd, pno ) values ( ?, ?, ?, ? )";
+            // 2. SQL 기재
+            PreparedStatement ps = conn.prepareStatement( SQL );
+            // 3. SQL 매개변수 대입
+            ps.setString( 1, inquiryDto.getInickname());
+            ps.setString( 2, inquiryDto.getIexplain());
+            ps.setString( 3, inquiryDto.getIpwd());
+            ps.setInt( 4, inquiryDto.getPno());
+            // 4. SQL 실행
+            int count = ps.executeUpdate();
+            // 5. SQL 결과 반환 및 리턴
+            if ( count == 1 ){
+                return true;
+            }else {
+                return false;
+            } // if end
+        } catch ( SQLException e ){
+            System.out.println("[경고] SQL 기재 실패");
+            return false;
+        } // try-catch end
+    } // func end
 
     // 6-2. 문의조회 메소드
     // 기능설명 : 사용자로부터 상세조회할 상품번호를 입력받아 문의내역을 호출한다.

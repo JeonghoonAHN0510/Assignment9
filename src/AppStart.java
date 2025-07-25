@@ -1,3 +1,4 @@
+import controller.InquiryController;
 import controller.ProductController;
 import model.dto.ProductDto;
 import view.MainView;
@@ -25,6 +26,12 @@ public class AppStart {
         // System.out.println( test );
         // * 상품판매여부수정 기능
         // boolean test = ProductController.getInstance().productSaleUpdate( 1, "판매완료 테스트");
+        // System.out.println( test );
+        // * 상품삭제 기능
+        // boolean test = ProductController.getInstance().productDelete( 1 );
+        // System.out.println( test );
+        // * 문의등록 기능
+        // boolean test = InquiryController.getInstance().inquiryRegis( "테스트", "테스트중입니다", "1234", 3 );
         // System.out.println( test );
 
         // 메인화면 호출

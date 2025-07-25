@@ -39,9 +39,9 @@ public class MainView {
                 }else if ( choose == 3 ){       // 3을 선택하면
                     productUpdate();
                 }else if ( choose == 4 ){       // 4를 선택하면
-
+                    productDelete();
                 }else if ( choose == 5 ){       // 5를 선택하면
-
+                    inquiryRegis();
                 }else if ( choose == 6 ){       // 6을 선택하면
 
                 }else if ( choose == 7 ){       // 7을 선택하면
@@ -109,7 +109,7 @@ public class MainView {
             // 1. 사용자로부터 입력받기
             System.out.print("수정할 상품번호 : ");        int pno = scan.nextInt();
             System.out.print("비밀번호 : ");              String ppwd = scan.next();
-            // 1-1. 비밀번호 검증하기
+            // * 비밀번호 검증하기
             boolean pwdCheck = productController.pwdCheck( pno, ppwd );
             if ( pwdCheck ){
                 // 2. controller에게 전달 후, 결과받기
@@ -164,11 +164,55 @@ public class MainView {
         } // try-catch end
     } // func end
 
-    // 4. 상품삭제 화면
-
+    // 4. 상품삭제 화면 + 상품정보가 없을 때, 입력하면 비밀번호 불일치로 나온다(수정필요)
+    public void productDelete(){
+        try {
+            // 1. 사용자로부터 입력받기
+            System.out.println("========================================================================================================");
+            System.out.print("삭제할 상품번호 : ");        int pno = scan.nextInt();
+            System.out.print("비밀번호 : ");              String ppwd = scan.next();
+            // * 비밀번호 검증하기
+            boolean pwdCheck = productController.pwdCheck( pno, ppwd );
+            if ( pwdCheck ){
+                // 2. controller에게 전달 후, 결과받기
+                boolean result = productController.productDelete( pno );
+                // 3. 결과에 따른 출력하기
+                if ( result ){
+                    System.out.println("[안내] 상품 삭제 성공");
+                }else {
+                    System.out.println("[경고] 상품 삭제 실패");
+                } // if end
+            }else {
+                System.out.println("[경고] 비밀번호가 일치하지 않습니다.");
+            } // if end
+        } catch ( InputMismatchException e ){
+            System.out.println("[경고] 입력타입이 일치하지 않습니다. 다시 입력하세요.");
+        } // try-catch end
+    } // func end
 
     // 5. 문의등록 화면
-
+    public void inquiryRegis(){
+        try {
+            // 1. 사용자로부터 입력받기
+            System.out.println("========================================================================================================");
+            System.out.print("문의할 상품번호 : ");        int pno = scan.nextInt();
+            System.out.print("문의자 닉네임 : ");          String inickname = scan.next();
+            scan.nextLine(); // 의미없는 nextLine()
+            System.out.print("문의내용 : ");              String iexplain = scan.nextLine();
+            System.out.print("비밀번호 : ");              String ipwd = scan.next();
+            System.out.println("========================================================================================================");
+            // 2. controller에게 전달 후, 결과 받기
+            boolean result = inquiryController.inquiryRegis( inickname, iexplain, ipwd, pno );
+            // 3. 결과에 따른 출력하기
+            if ( result ){
+                System.out.println("[안내] 문의 등록 성공");
+            }else {
+                System.out.println("[경고] 문의 등록 실패");
+            } // if end
+        } catch ( InputMismatchException e ){
+            System.out.println("[경고] 입력타입이 일치하지 않습니다. 다시 입력하세요.");
+        } // try-catch end
+    } // func end
 
     // 6. 상품상세조회 화면
 

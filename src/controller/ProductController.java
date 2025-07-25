@@ -100,9 +100,18 @@ public class ProductController {
     // 4. 상품삭제 메소드
     // 기능설명 : 사용자로부터 삭제할 상품번호와 비밀번호를 입력받아 해당하는 상품을 삭제한다.
     // 메소드명 : productDelete()
-    // 매개변수 : int pno, String ppwd
+    // 매개변수 : int pno
     // 반환값 : true(성공) / false(실패) -> boolean
+    public boolean productDelete( int pno ){
+        // 1. 유효성 검사
 
+        // 2. 객체 생성
+
+        // 3. dao에게 전달 후, 결과받기
+        boolean result = productDao.productDelete( pno );
+        // 4. view에게 결과 전달하기
+        return result;
+    } // func end
 
     // 7. 등록랭킹조회 메소드
     // 기능설명 : 상품DB에 등록된 상품개수를 세어 상위 10명까지 닉네임과 등록수를 호출한다.
