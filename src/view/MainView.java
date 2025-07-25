@@ -60,7 +60,14 @@ public class MainView {
     } // for end
 
     // 1. 상품등록 화면
+    public void productRegisPrint(){
+        // 1. 사용자로부터 입력받기
 
+        // 2. controller에게 전달 후 결과 받기
+
+        // 3. 결과에 따른 출력하기
+
+    } // func end
 
     // 2. 상품전체조회 화면
 
