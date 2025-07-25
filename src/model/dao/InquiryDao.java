@@ -3,6 +3,7 @@ package model.dao;
 import model.dto.InquiryDto;
 
 import java.sql.*;
+import java.util.ArrayList;
 
 public class InquiryDao {
     // * 싱글톤 구성
@@ -64,9 +65,9 @@ public class InquiryDao {
     // 기능설명 : 사용자로부터 상세조회할 상품번호를 입력받아 문의내역을 호출한다.
     // 메소드명 : inquiryPrint()
     // 매개변수 : int pno
-    // 반환값 : InquiryDto
-    public InquiryDto inquiryPrint( int pno ){
-        InquiryDto inquiryDto = new InquiryDto();
+    // 반환값 : ArrayList<InquiryDto>
+    public ArrayList<InquiryDto> inquiryPrint(int pno ){
+        ArrayList<InquiryDto> inquiryDtos = new ArrayList<>();
         try {
             // 1. SQL 작성
             String SQL = "select * from inquiry where pno = ?";
@@ -84,11 +85,13 @@ public class InquiryDao {
                 String iexplain = rs.getString("iexplain");
                 String ipwd = rs.getString("ipwd");
                 // 객체에 대입하기
-                inquiryDto = new InquiryDto( ino, inickname, iexplain, ipwd, pno );
+                InquiryDto inquiryDto = new InquiryDto( ino, inickname, iexplain, ipwd, pno );
+                // 리스트에 객체 추가하기
+                inquiryDtos.add( inquiryDto );
             } // while end
         } catch ( SQLException e ){
             System.out.println("[경고] SQL 기재 실패");
         } // try-catch end
-        return inquiryDto;
+        return inquiryDtos;
     } // func end
 } // class end

@@ -73,7 +73,7 @@ public class ProductDao {
         ArrayList<ProductDto> productDtos = new ArrayList<>();
         try {
             // 1. SQL 작성
-            String SQL = "select pno, pnickname, pname, pexplain, pprice, date_format( pdate, '%m-%d' ) pdate, psale from product";
+            String SQL = "select pno, pnickname, pname, pexplain, pprice, date_format( pdate, '%Y-%m-%d' ) pdate, psale from product";
             // 2. SQL 기재
             PreparedStatement ps = conn.prepareStatement( SQL );
             // 3. SQL 매개변수 대입
@@ -112,7 +112,7 @@ public class ProductDao {
         ProductDto blank = new ProductDto();
         try {
             // 1. SQL 작성
-            String SQL = "select pno, pnickname, pname, pexplain, pprice, date_format( pdate, '%m-%d' ) pdate, psale from product where pno = ?";
+            String SQL = "select pno, pnickname, pname, pexplain, pprice, date_format( pdate, '%Y-%m-%d' ) pdate, psale from product where pno = ?";
             // 2. SQL 기재
             PreparedStatement ps = conn.prepareStatement( SQL );
             // 3. SQL 매개변수 대입
@@ -268,10 +268,10 @@ public class ProductDao {
         ArrayList<ProductDto> productDtos = new ArrayList<>();
         try {
             // 1. SQL 작성
-            String SQL = "select pno, pnickname, pname, pexplain, pprice, date_format( pdate, '%m-%d' ) pdate, psale from product where pname like ? or pexplain like ?; ";
+            String SQL = "select pno, pnickname, pname, pexplain, pprice, date_format( pdate, '%Y-%m-%d' ) pdate, psale from product where pname like ? or pexplain like ?; ";
             // 2. SQL 기재
             PreparedStatement ps = conn.prepareStatement( SQL );
-            // 3. SQL 매개변수 대입
+            // 3. SQL 매개변수 대입 : like %?%를 하려면 setString에서 구성
             ps.setString( 1, "%" + keyword + "%" );
             ps.setString( 2, "%" + keyword + "%" );
             // 4. SQL 실행

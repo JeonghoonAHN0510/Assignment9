@@ -3,6 +3,8 @@ package controller;
 import model.dao.InquiryDao;
 import model.dto.InquiryDto;
 
+import java.util.ArrayList;
+
 public class InquiryController {
     // * 싱글톤 구성
     private InquiryController(){}
@@ -34,15 +36,15 @@ public class InquiryController {
     // 기능설명 : 사용자로부터 상세조회할 상품번호를 입력받아 문의내역을 호출한다.
     // 메소드명 : inquiryPrint()
     // 매개변수 : int pno
-    // 반환값 : InquiryDto
-    public InquiryDto inquiryPrint( int pno ){
+    // 반환값 : ArrayList<InquiryDto>
+    public ArrayList<InquiryDto> inquiryPrint(int pno ){
         // 1. 유효성 검사
 
         // 2. 객체 생성
 
         // 3. dao에게 전달 후, 결과 받기
-        InquiryDto inquiryDto = inquiryDao.inquiryPrint( pno );
+        ArrayList<InquiryDto> inquiryDtos = inquiryDao.inquiryPrint( pno );
         // 4. view에게 결과 전달하기
-        return inquiryDto;
+        return inquiryDtos;
     } // func end
 } // class end

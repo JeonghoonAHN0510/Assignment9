@@ -6,6 +6,7 @@ import model.dto.InquiryDto;
 import model.dto.ProductDto;
 import model.dto.RankingDto;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -98,7 +99,9 @@ public class MainView {
             System.out.println("닉네임 : " + productDto.getPnickname());
             System.out.println("상품명 : " + productDto.getPname());
             System.out.println("상품설명 : " + productDto.getPexplain());
-            System.out.printf("상품가격 : %d원\n", productDto.getPprice());         // 천단위 , 추가
+            DecimalFormat df = new DecimalFormat("###,###");
+            String formatPrice = df.format(productDto.getPprice());
+            System.out.printf("상품가격 : %s원\n", formatPrice);
             System.out.println("등록일 : " + productDto.getPdate());             // 월 일 추가방법 생각하기
             System.out.println("판매여부 : " + productDto.getPsale());
             System.out.println("========================================================================================================");
@@ -121,7 +124,9 @@ public class MainView {
                 System.out.println("[기존 상품정보]");
                 System.out.println("상품명 : " + productDto.getPname());
                 System.out.println("상품설명 : " + productDto.getPprice());
-                System.out.println("가격 : " + productDto.getPprice());
+                DecimalFormat df = new DecimalFormat("###,###");
+                String formatPrice = df.format(productDto.getPprice());
+                System.out.printf("상품가격 : %s원\n", formatPrice);
                 System.out.println("판매여부 : " + productDto.getPsale());
                 System.out.println("========================================================================================================");
                 System.out.println("                                  1.상품정보수정 | 2.판매여부수정");
@@ -225,16 +230,25 @@ public class MainView {
             System.out.println("========================================================================================================");
             // 2. controller에게 전달 후, 결과 받기
             ProductDto productDto = productController.productDetailPrint( pno );
-            InquiryDto inquiryDto = inquiryController.inquiryPrint( pno );
+            ArrayList<InquiryDto> inquiryDtos = inquiryController.inquiryPrint( pno );
             // 3. 결과에 따른 출력하기
             System.out.println("상품번호 : " + pno);
             System.out.println("닉네임 : " + productDto.getPnickname());
             System.out.println("상품명 : " + productDto.getPname());
-            System.out.printf("상품가격 : %d원\n", productDto.getPprice());
+            DecimalFormat df = new DecimalFormat("###,###");
+            String formatPrice = df.format(productDto.getPprice());
+            System.out.printf("상품가격 : %s원\n", formatPrice);
             System.out.println("등록일 : " + productDto.getPdate());
             System.out.println("판매여부 : " + productDto.getPsale());
             System.out.println("[문의내역]");
-            System.out.printf("%s | %s\n", inquiryDto.getIexplain(), inquiryDto.getInickname());
+            if (inquiryDtos.isEmpty()){
+                System.out.println("[문의가 없습니다.]");
+            }else {
+                for ( int i = 0; i < inquiryDtos.size(); i++ ){
+                    InquiryDto inquiryDto = inquiryDtos.get(i);
+                    System.out.printf("%d. %s | %s\n", i + 1, inquiryDto.getIexplain(), inquiryDto.getInickname());
+                } // for end
+            } // if end
             System.out.println("========================================================================================================");
         } catch ( InputMismatchException e ){
             System.out.println("[경고] 입력타입이 일치하지 않습니다. 다시 입력하세요.");
@@ -271,7 +285,9 @@ public class MainView {
                 System.out.println("닉네임 : " + productDto.getPnickname());
                 System.out.println("상품명 : " + productDto.getPname());
                 System.out.println("상품설명 : " + productDto.getPexplain());
-                System.out.printf("상품가격 : %d원\n", productDto.getPprice());
+                DecimalFormat df = new DecimalFormat("###,###");
+                String formatPrice = df.format(productDto.getPprice());
+                System.out.printf("상품가격 : %s원\n", formatPrice);
                 System.out.println("등록일 : " + productDto.getPdate());
                 System.out.println("판매여부 : " + productDto.getPsale());
                 System.out.println("========================================================================================================");
