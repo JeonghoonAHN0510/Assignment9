@@ -29,7 +29,7 @@ create table inquiry(
 
 select * from product;
 select * from inquiry;
-select date_format( pdate, '%m-%d' ) from product;
+select date_format( pdate, '%Y-%m-%d' ) from product;
 select pno, pnickname, pname, pexplain, pprice, date_format( pdate, '%m-%d' ) pdate, psale from product;
 select pno, pnickname, pname, pexplain, pprice, date_format( pdate, '%m-%d' ) pdate, psale from product where pno = 1;
 select count(*) count from product where pno = 1 and ppwd = 1234;
