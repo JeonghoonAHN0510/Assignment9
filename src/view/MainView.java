@@ -2,6 +2,7 @@ package view;
 
 import controller.InquiryController;
 import controller.ProductController;
+import model.dto.InquiryDto;
 import model.dto.ProductDto;
 
 import java.util.ArrayList;
@@ -43,11 +44,11 @@ public class MainView {
                 }else if ( choose == 5 ){       // 5를 선택하면
                     inquiryRegis();
                 }else if ( choose == 6 ){       // 6을 선택하면
-
+                    productDetailPrint();
                 }else if ( choose == 7 ){       // 7을 선택하면
 
                 }else if ( choose == 8 ){       // 8을 선택하면
-
+                    searchPrint();
                 }else {                         // 잘못 선택하면
                     System.out.println("[경고] 존재하지않는 선택입니다. 다시 입력하세요.");
                 } // if end
@@ -215,12 +216,55 @@ public class MainView {
     } // func end
 
     // 6. 상품상세조회 화면
-
+    public void productDetailPrint(){
+        try {
+            // 1. 사용자로부터 입력받기
+            System.out.println("========================================================================================================");
+            System.out.print("상세조회할 상품번호 : ");      int pno = scan.nextInt();
+            System.out.println("========================================================================================================");
+            // 2. controller에게 전달 후, 결과 받기
+            ProductDto productDto = productController.productDetailPrint( pno );
+            InquiryDto inquiryDto = inquiryController.inquiryPrint( pno );
+            // 3. 결과에 따른 출력하기
+            System.out.println("상품번호 : " + pno);
+            System.out.println("닉네임 : " + productDto.getPnickname());
+            System.out.println("상품명 : " + productDto.getPname());
+            System.out.printf("상품가격 : %d원\n", productDto.getPprice());
+            System.out.println("등록일 : " + productDto.getPdate());
+            System.out.println("판매여부 : " + productDto.getPsale());
+            System.out.println("[문의내역]");
+            System.out.printf("%s | %s\n", inquiryDto.getIexplain(), inquiryDto.getInickname());
+            System.out.println("========================================================================================================");
+        } catch ( InputMismatchException e ){
+            System.out.println("[경고] 입력타입이 일치하지 않습니다. 다시 입력하세요.");
+        } // try-catch end
+    } // func end
 
     // 7. 등록랭킹조회 화면
 
 
     // 8. 검색 화면
-
-
+    public void searchPrint(){
+        try {
+            // 1. 사용자로부터 입력받기
+            System.out.println("========================================================================================================");
+            System.out.print("검색 : ");      String keyword = scan.next();
+            System.out.println("========================================================================================================");
+            // 2. controller에게 전달 후, 결과 받기
+            ArrayList<ProductDto> productDtos = productController.search( keyword );
+            // 3. 결과에 따른 출력하기
+            for ( ProductDto productDto : productDtos ){
+                System.out.println("상품번호 : " + productDto.getPno());
+                System.out.println("닉네임 : " + productDto.getPnickname());
+                System.out.println("상품명 : " + productDto.getPname());
+                System.out.println("상품설명 : " + productDto.getPexplain());
+                System.out.printf("상품가격 : %d원\n", productDto.getPprice());
+                System.out.println("등록일 : " + productDto.getPdate());
+                System.out.println("판매여부 : " + productDto.getPsale());
+                System.out.println("========================================================================================================");
+            } // for end
+        } catch ( InputMismatchException e ){
+            System.out.println("[경고] 입력타입이 일치하지 않습니다. 다시 입력하세요.");
+        } // try-catch end
+    } // func end
 } // class end

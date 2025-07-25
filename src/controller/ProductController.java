@@ -125,7 +125,16 @@ public class ProductController {
     // 메소드명 : search()
     // 매개변수 : String keyword
     // 반환값 : ProductDto
+    public ArrayList<ProductDto> search( String keyword ){
+        // 1. 유효성 검사
 
+        // 2. 객체 생성
+
+        // 3. dao에게 전달 후, 결과 받기
+        ArrayList<ProductDto> productDtos = productDao.search( keyword );
+        // 4. view에게 결과 전달하기
+        return productDtos;
+    } // func end
 
     // *. 비밀번호검사 메소드
     // 기능설명 : 사용자로부터 상품번호와 비밀번호를 입력받아, 비밀번호 검사를 한다.

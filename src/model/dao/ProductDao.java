@@ -100,7 +100,7 @@ public class ProductDao {
         return productDtos;
     } // func end
 
-    // 3. 상품상세조회 메소드
+    // 3 + 6-1. 상품상세조회 메소드
     // 기능설명 : 사용자로부터 수정할 상품번호, 비밀번호를 입력받아 기본정보를 출력하고 3-2로 연계한다.
     // 기능설명 : 사용자로부터 상세조회할 상품번호를 입력받아 해당 상품번호, 닉네임, 상품명, 상품가격, 등록일, 판매여부를 호출한다.
     // 메소드명 : productDetailPrint()
@@ -236,8 +236,40 @@ public class ProductDao {
     // 기능설명 : 사용자로부터 검색어를 입력받아 상품명 / 설명에 해당 키워드가 포함된 상품의 (닉네임, 상품명, 상품설명, 상품가격, 등록일, 판매여부)를 호출한다.
     // 메소드명 : search()
     // 매개변수 : String keyword
-    // 반환값 : ProductDto
-
+    // 반환값 : ArrayList<ProductDto>
+    public ArrayList<ProductDto> search( String keyword ){
+        // 실패했을 때 리턴할 객체 생성
+        ArrayList<ProductDto> productDtos = new ArrayList<>();
+        try {
+            // 1. SQL 작성
+            String SQL = "select pno, pnickname, pname, pexplain, pprice, date_format( pdate, '%m-%d' ) pdate, psale from product where pname like ? or pexplain like ?; ";
+            // 2. SQL 기재
+            PreparedStatement ps = conn.prepareStatement( SQL );
+            // 3. SQL 매개변수 대입
+            ps.setString( 1, "%" + keyword + "%" );
+            ps.setString( 2, "%" + keyword + "%" );
+            // 4. SQL 실행
+            ResultSet rs = ps.executeQuery();
+            // 5. SQL 결과 반환 및 리턴
+            while ( rs.next() ){
+                // 5-1. 결과에서 값 뽑아내기
+                int pno1 = rs.getInt("pno");
+                String pnickname = rs.getString("pnickname");
+                String pname = rs.getString("pname");
+                String pexplain = rs.getString("pexplain");
+                int pprice = rs.getInt("pprice");
+                String pdate = rs.getString("pdate");
+                String psale = rs.getString("psale");
+                // 5-2. 리턴할 객체 생성
+                ProductDto productDto = new ProductDto( pno1, pnickname, pname, pexplain, pprice, pdate, psale);
+                // 5-3. 생성한 객체를 리스트에 추가
+                productDtos.add(productDto);
+            } // while end
+        } catch ( SQLException e ){
+            System.out.println("[경고] SQL 기재 실패");
+        } // try-catch end
+        return productDtos;
+    } // func end
 
     // *. 비밀번호검사 메소드
     // 기능설명 : 사용자로부터 상품번호와 비밀번호를 입력받아, 비밀번호 검사를 한다.

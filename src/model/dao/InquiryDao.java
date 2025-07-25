@@ -2,10 +2,7 @@ package model.dao;
 
 import model.dto.InquiryDto;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
 
 public class InquiryDao {
     // * 싱글톤 구성
@@ -68,7 +65,30 @@ public class InquiryDao {
     // 메소드명 : inquiryPrint()
     // 매개변수 : int pno
     // 반환값 : InquiryDto
-
-
-
+    public InquiryDto inquiryPrint( int pno ){
+        InquiryDto inquiryDto = new InquiryDto();
+        try {
+            // 1. SQL 작성
+            String SQL = "select * from inquiry where pno = ?";
+            // 2. SQL 기재
+            PreparedStatement ps = conn.prepareStatement( SQL );
+            // 3. SQL 매개변수 대입
+            ps.setInt( 1, pno );
+            // 4. SQL 실행
+            ResultSet rs = ps.executeQuery();
+            // 5. SQL 결과 반환 및 리턴
+            while ( rs.next() ){
+                // rs에서 값 꺼내기
+                int ino = rs.getInt("ino");
+                String inickname = rs.getString("inickname");
+                String iexplain = rs.getString("iexplain");
+                String ipwd = rs.getString("ipwd");
+                // 객체에 대입하기
+                inquiryDto = new InquiryDto( ino, inickname, iexplain, ipwd, pno );
+            } // while end
+        } catch ( SQLException e ){
+            System.out.println("[경고] SQL 기재 실패");
+        } // try-catch end
+        return inquiryDto;
+    } // func end
 } // class end

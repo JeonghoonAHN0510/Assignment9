@@ -35,7 +35,14 @@ public class InquiryController {
     // 메소드명 : inquiryPrint()
     // 매개변수 : int pno
     // 반환값 : InquiryDto
+    public InquiryDto inquiryPrint( int pno ){
+        // 1. 유효성 검사
 
+        // 2. 객체 생성
 
-
+        // 3. dao에게 전달 후, 결과 받기
+        InquiryDto inquiryDto = inquiryDao.inquiryPrint( pno );
+        // 4. view에게 결과 전달하기
+        return inquiryDto;
+    } // func end
 } // class end
