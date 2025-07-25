@@ -1,6 +1,7 @@
 package model.dao;
 
 import model.dto.ProductDto;
+import model.dto.RankingDto;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -229,8 +230,33 @@ public class ProductDao {
     // 기능설명 : 상품DB에 등록된 상품개수를 세어 상위 10명까지 닉네임과 등록수를 호출한다.
     // 메소드명 : rankingPrint()
     // 매개변수 : X
-    // 반환값 : ArrayList<ProductDto>
+    // 반환값 : ArrayList<RankingDto>
+    public ArrayList<RankingDto> rankingPrint(){
+        ArrayList<RankingDto> rankingDtos = new ArrayList<>();
+        try {
+            // 1. SQL 작성
+            String SQL = "select pnickname, count(*) count from product group by pnickname order by count desc, pnickname;";
+            // 2. SQL 기재
+            PreparedStatement ps = conn.prepareStatement( SQL );
+            // 3. SQL 매개변수 대입
 
+            // 4. SQL 실행
+            ResultSet rs = ps.executeQuery();
+            // 5. SQL 결과 반환 및 리턴
+            while ( rs.next() ){
+                // 결과에서 값 뽑아내기
+                String pnickname = rs.getString("pnickname");
+                int count = rs.getInt("count");
+                // 객체 생성하기
+                RankingDto rankingDto = new RankingDto( pnickname, count );
+                // 리스트에 객체 추가하기
+                rankingDtos.add( rankingDto );
+            } // while end
+        } catch ( SQLException e ){
+            System.out.println("[경고] SQL 기재 실패");
+        } // try-catch end
+        return rankingDtos;
+    } // func end
 
     // 8. 검색 메소드
     // 기능설명 : 사용자로부터 검색어를 입력받아 상품명 / 설명에 해당 키워드가 포함된 상품의 (닉네임, 상품명, 상품설명, 상품가격, 등록일, 판매여부)를 호출한다.

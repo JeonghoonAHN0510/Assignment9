@@ -2,6 +2,7 @@ import controller.InquiryController;
 import controller.ProductController;
 import model.dto.InquiryDto;
 import model.dto.ProductDto;
+import model.dto.RankingDto;
 import view.MainView;
 
 import java.util.ArrayList;
@@ -30,10 +31,11 @@ public class AppStart {
         // InquiryDto test = InquiryController.getInstance().inquiryPrint( 5 );
         // * 검색 기능
         // ProductDto test = ProductController.getInstance().search( "블루투스" );
+        // * 랭킹 기능
+        // ArrayList<RankingDto> test = ProductController.getInstance().rankingPrint();
 
 
-
-        // System.out.println( test );
+        //System.out.println( test );
         // 메인화면 호출
         MainView.getInstance().main();
 

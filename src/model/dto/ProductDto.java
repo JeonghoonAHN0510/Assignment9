@@ -2,14 +2,14 @@ package model.dto;
 
 public class ProductDto {
     // 1. 멤버변수
-    private int pno;        // 상품번호
-    String pnickname;       // 판매자닉네임
-    String pname;           // 상품명
-    String pexplain;        // 상품설명
-    int pprice;             // 상품가격
-    String ppwd;            // 상품비밀번호
-    String pdate;           // 상품등록일
-    String psale;           // 상품판매여부
+    private int pno;                // 상품번호
+    private String pnickname;       // 판매자닉네임
+    private String pname;           // 상품명
+    private String pexplain;        // 상품설명
+    private int pprice;             // 상품가격
+    private String ppwd;            // 상품비밀번호
+    private String pdate;           // 상품등록일
+    private String psale;           // 상품판매여부
     // 2. 생성자 : 기본생성자 / 전체생성자 + 필요시 추가
     public ProductDto(){}
     public ProductDto(int pno, String pnickname, String pname, String pexplain, int pprice, String ppwd, String pdate, String psale) {

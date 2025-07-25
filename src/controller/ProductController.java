@@ -2,6 +2,7 @@ package controller;
 
 import model.dao.ProductDao;
 import model.dto.ProductDto;
+import model.dto.RankingDto;
 
 import java.util.ArrayList;
 
@@ -117,8 +118,17 @@ public class ProductController {
     // 기능설명 : 상품DB에 등록된 상품개수를 세어 상위 10명까지 닉네임과 등록수를 호출한다.
     // 메소드명 : rankingPrint()
     // 매개변수 : X
-    // 반환값 : ArrayList<ProductDto>
+    // 반환값 : ArrayList<RankingDto>
+    public ArrayList<RankingDto> rankingPrint(){
+        // 1. 유효성 검사
 
+        // 2. 객체 생성
+
+        // 3. dao에게 전달 후, 결과받기
+        ArrayList<RankingDto> result = productDao.rankingPrint();
+        // 4. view에게 결과 전달하기
+        return result;
+    } // func end
 
     // 8. 검색 메소드
     // 기능설명 : 사용자로부터 검색어를 입력받아 상품명 / 설명에 해당 키워드가 포함된 상품의 (닉네임, 상품명, 상품설명, 상품가격, 등록일, 판매여부)를 호출한다.

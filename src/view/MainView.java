@@ -4,6 +4,7 @@ import controller.InquiryController;
 import controller.ProductController;
 import model.dto.InquiryDto;
 import model.dto.ProductDto;
+import model.dto.RankingDto;
 
 import java.util.ArrayList;
 import java.util.InputMismatchException;
@@ -46,7 +47,7 @@ public class MainView {
                 }else if ( choose == 6 ){       // 6을 선택하면
                     productDetailPrint();
                 }else if ( choose == 7 ){       // 7을 선택하면
-
+                    rankingPrint();
                 }else if ( choose == 8 ){       // 8을 선택하면
                     searchPrint();
                 }else {                         // 잘못 선택하면
@@ -241,7 +242,19 @@ public class MainView {
     } // func end
 
     // 7. 등록랭킹조회 화면
+    public void rankingPrint(){
+        // 1. 사용자로부터 입력받기
 
+        // 2. controller에게 전달 후, 결과 받기
+        ArrayList<RankingDto> rankingDtos = productController.rankingPrint();
+        // 3. 결과에 따른 출력하기
+        System.out.println("================================================ 등록랭킹 ================================================");
+        for ( int i = 0; i < rankingDtos.size(); i++ ){
+            RankingDto rankingDto = rankingDtos.get(i);
+            System.out.printf("%d등 \t %s \t 등록수 : %d\n", i+1, rankingDto.getPnickname(), rankingDto.getCount() );
+        } // for end
+        System.out.println("========================================================================================================");
+    } // func end
 
     // 8. 검색 화면
     public void searchPrint(){
